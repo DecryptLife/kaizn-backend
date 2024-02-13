@@ -1,0 +1,18 @@
+Internal Server Error: /api/register/
+Traceback (most recent call last):
+  File "/home/benson/Documents/Kaizntree/kenv/lib/python3.10/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/home/benson/Documents/Kaizntree/kenv/lib/python3.10/site-packages/django/core/handlers/base.py", line 197, in _get_response
+    response = wrapped_callback(request, *callback_args, **callback_kwargs)
+  File "/home/benson/Documents/Kaizntree/kenv/lib/python3.10/site-packages/django/views/decorators/csrf.py", line 65, in _view_wrapper
+    return view_func(request, *args, **kwargs)
+  File "/home/benson/Documents/Kaizntree/kenv/lib/python3.10/site-packages/django/views/generic/base.py", line 104, in view
+    return self.dispatch(request, *args, **kwargs)
+  File "/home/benson/Documents/Kaizntree/kenv/lib/python3.10/site-packages/rest_framework/views.py", line 492, in dispatch
+    request = self.initialize_request(request, *args, **kwargs)
+  File "/home/benson/Documents/Kaizntree/kenv/lib/python3.10/site-packages/rest_framework/views.py", line 394, in initialize_request
+    authenticators=self.get_authenticators(),
+  File "/home/benson/Documents/Kaizntree/kenv/lib/python3.10/site-packages/rest_framework/views.py", line 272, in get_authenticators
+    return [auth() for auth in self.authentication_classes]
+TypeError: 'type' object is not iterable
+"POST /api/register/ HTTP/1.1" 500 88358
