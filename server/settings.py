@@ -72,7 +72,7 @@ MIDDLEWARE = [
 
 CORS_ALLOW_CREDENTIALS =True
 CORS_ORIGIN_WHITELIST = [
-     'http://localhost:5173',  # The default port for React's development server
+     'https://kaizn.btdcrypt.com',  # The default port for React's development server
 ]
 
 LOGGING = {
