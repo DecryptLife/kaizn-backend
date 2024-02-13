@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 from datetime import timedelta
+import dj_database_url
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,12 +23,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-p+a(z7568)!0*i1!w)dz)h+7q7*+hyk5_dxy(24lggb83dfeik"
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://kaizn-backend-aad5eba1c3ec.herokuapp.com']
 
 
 # Application definition
@@ -116,16 +118,20 @@ WSGI_APPLICATION = "server.wsgi.application"
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql",
-        "NAME": "kaizn",
-        "USER": "postgres",
-        "PASSWORD":"Thombee@2602",
-        'HOST':"localhost",
-        "PORT":"5432"
-    }
-}
+# DATABASES = {
+#     "default": {
+#         "ENGINE": "django.db.backends.postgresql",
+#         "NAME": "kaizn",
+#         "USER": "postgres",
+#         "PASSWORD":"Thombee@2602",
+#         'HOST':"localhost",
+#         "PORT":"5432"
+#     }
+# }
+
+# Parse database configuration from $DATABASE_URL
+DATABASES = {'default': dj_database_url.config(conn_max_age=600, ssl_require=True)}
+
 
 
 # Password validation
