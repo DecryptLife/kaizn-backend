@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['https://kaizn-backend-aad5eba1c3ec.herokuapp.com']
+ALLOWED_HOSTS = ['kaizn-backend-aad5eba1c3ec.herokuapp.com']
 
 
 # Application definition
@@ -72,7 +72,7 @@ MIDDLEWARE = [
 
 CORS_ALLOW_CREDENTIALS =True
 CORS_ORIGIN_WHITELIST = [
-     'https://kaizn.btdcrypt.com',  # The default port for React's development server
+     'kaizn.btdcrypt.com',  # The default port for React's development server
 ]
 
 LOGGING = {
