@@ -71,8 +71,9 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_CREDENTIALS =True
-CORS_ORIGIN_WHITELIST = [
-     'kaizn.btdcrypt.com',  # The default port for React's development server
+CORS_ALLOWED_ORIGINS = [
+    'https://kaizn.btdcrypt.com',
+    # Add any other front-end domains that need to access your backend here
 ]
 
 LOGGING = {
