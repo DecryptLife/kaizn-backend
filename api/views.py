@@ -1,5 +1,5 @@
 from rest_framework import viewsets, status
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, action
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Item, Category, Tag
@@ -8,6 +8,7 @@ from .serializers import ItemSerializer, CategorySerializer, TagSerializer, Regi
 from rest_framework_simplejwt.tokens import RefreshToken
 from api.authentication import CookieJWTAuthentication
 from django.http import JsonResponse
+from django.shortcuts import get_list_or_404, get_object_or_404
 # Create your views here.
 
 
@@ -22,7 +23,8 @@ def get_tokens_for_user(user):
 @api_view(['POST'])
 @permission_classes([AllowAny])
 def register(request):
-
+    print("register request")
+    print(request.data)
     serializer = RegisterSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -77,6 +79,19 @@ class ItemViewSet(viewsets.ModelViewSet):
     serializer_class = ItemSerializer
     permission_classes = [IsAuthenticated]
 
+    @action(methods=['delete'], detail=False, url_path='bulk-delete')
+    def bulk_delete(self, request, *args, **kwargs):
+        ids = request.data.get('ids')
+        if not ids:
+            return Response({'details': 'No items specified'}, status=status.HTTP_400_BAD_REQUEST)
+        
+        # You can use `get_list_or_404` if you want to ensure all IDs exist before attempting delete.
+        # items_to_delete = get_list_or_404(Item, id__in=ids)
+        
+        # If you're okay with attempting to delete without confirming all exist, you can do:
+        items_to_delete = Item.objects.filter(id__in=ids)
+        items_to_delete.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 class CategoryViewSet(viewsets.ModelViewSet):
     authentication_classes = (CookieJWTAuthentication, )
     queryset = Category.objects.all()

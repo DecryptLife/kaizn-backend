@@ -47,6 +47,7 @@ class RegisterSerializer(serializers.ModelSerializer):
 
     def validate_username(self, value):
         if User.objects.filter(username=value).exists():
+            print("user already exist")
             raise serializers.ValidationError("A user with that username already exists")
         return value
     
